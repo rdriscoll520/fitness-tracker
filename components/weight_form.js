@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 
 function WeightForm() {
-    //hooks
     const [username, setUsername] = useState('');
     const [weight, setWeight] = useState('');
 
-    //asynchronus function to handle forms
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        //POST request
         const response = await fetch('http://localhost:5000/add_weight', {
             method: 'POST',
             headers: {
@@ -17,7 +13,6 @@ function WeightForm() {
             },
             body: JSON.stringify({ username, weight }) 
         });
-        //convert the data to a JSON object
         const data = await response.json();
         alert(data.message);
     };
@@ -31,9 +26,16 @@ function WeightForm() {
                 placeholder="Enter username"
                 required
             />
+            <input
+                type="number"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
+                placeholder="Enter weight in lbs"
+                required
+            />
             <button type="submit">Submit</button>
         </form>
-    )
+    );
 }
 
 export default WeightForm;

@@ -5,7 +5,7 @@ function WeightHistory({ username }) {
 
     useEffect(() => {
         const fetchWeights = async () => {
-            const response = await fetch(`http//localhost:5000/get_weights/${username}`);
+            const response = await fetch(`http://localhost:5000/get_weights/${username}`);
             const data = await response.json();
             setWeights(data)
         };
