@@ -16,7 +16,7 @@ function WeightForm() {
         const data = await response.json();
         alert(data.message);
     };
-
+    
     return (
         <form onSubmit={handleSubmit}>
             <input
