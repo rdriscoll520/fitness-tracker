@@ -39,11 +39,11 @@ export const MenuIcon = styled.div`
 `;
 
 export const PlusIcon = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   position: fixed;
-  right: 10px;
-  top: 10px;
+  right: 125px;
+  top: 0px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -59,7 +59,6 @@ export const PlusIcon = styled.div`
     background-color: #444;
   }
 `;
-
 export const DropdownMenu = styled.div`
   position: absolute;
   right: 10px;
