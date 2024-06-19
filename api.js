@@ -1,17 +1,13 @@
-function sendData(data) {
-    return fetch('http://localhost:5000/data', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-  }
-  
-  export default sendData;
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:5000',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export default api;
+
   
   
