@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';  // Import useParams
+import { useAuth } from '../context/AuthContext';
+
 
 function WeightHistory() {
     const [weights, setWeights] = useState([]);
     const [error, setError] = useState(null);
-    const { username } = useParams();  // Destructure username from URL parameters
+    const auth = useAuth();  // Use the useAuth hook to access the authentication status
 
     useEffect(() => {
         const fetchWeights = async () => {
-            if (!username) { // Check if username is available
+            const token = localStorage.getItem('token');  // Retrieve the token from localStorage
+            if (!token || !auth.isAuthenticated) { // Check if token and authenticated state are valid
                 return;
             }
             try {
-                const response = await fetch(`http://localhost:5000/get_weights/${username}`);
+                const response = await fetch('http://localhost:5000/get_weights', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -25,7 +32,7 @@ function WeightHistory() {
         };
 
         fetchWeights();
-    }, [username]); // Dependency array includes username to re-run when username changes
+    }, [auth.isAuthenticated]); // Depend on isAuthenticated to re-run when authentication status changes
 
     if (error) {
         return <div>Error: {error}</div>;
